@@ -2,18 +2,10 @@
 <html lang="ar" dir="rtl">
 
 <head>
-
 <meta charset="UTF-8">
-
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>تحضير الصف الخامس أ</title>
-
 <style>
-
 :root {
   --bg-color: #0F172A;
   --panel-bg: #1E293B;
@@ -22,7 +14,6 @@
   --input-bg: #334155;
   --btn-hover: #1D4ED8;
 }
-
 [data-theme="blue"] {
   --bg-color: #0B132B;
   --panel-bg: #1C2541;
@@ -31,7 +22,6 @@
   --input-bg: #3A506B;
   --btn-hover: #4361EE;
 }
-
 [data-theme="dark"] {
   --bg-color: #0F172A;
   --panel-bg: #1E293B;
@@ -40,7 +30,6 @@
   --input-bg: #334155;
   --btn-hover: #16A34A;
 }
-
 [data-theme="light"] {
   --bg-color: #F1F5F9;
   --panel-bg: #FFFFFF;
@@ -49,7 +38,6 @@
   --input-bg: #E2E8F0;
   --btn-hover: #15803D;
 }
-
 [data-theme="green"] {
   --bg-color: #064E3B;
   --panel-bg: #022C22;
@@ -58,11 +46,7 @@
   --input-bg: #065F46;
   --btn-hover: #047857;
 }
-
-* {
-  box-sizing: border-box;
-}
-
+* { box-sizing: border-box; }
 body {
   font-family: Cairo, Arial, sans-serif;
   direction: rtl;
@@ -72,18 +56,12 @@ body {
   margin: 0;
   transition: 0.3s;
 }
-
 h2 {
   text-align: center;
   color: var(--accent-color);
   margin-bottom: 20px;
   font-weight: 800;
 }
-
-/* =========================
-   شاشة القفل
-========================= */
-
 #lockScreen {
   position: fixed;
   inset: 0;
@@ -94,7 +72,6 @@ h2 {
   align-items: center;
   z-index: 999;
 }
-
 .lock-box {
   background: var(--panel-bg);
   padding: 30px;
@@ -104,7 +81,6 @@ h2 {
   width: 90%;
   max-width: 350px;
 }
-
 .lock-box input {
   background: var(--input-bg);
   color: var(--text-color);
@@ -118,7 +94,6 @@ h2 {
   outline: none;
   letter-spacing: 5px;
 }
-
 .lock-box button {
   background: #3B82F6;
   color: #fff;
@@ -130,23 +105,16 @@ h2 {
   font-weight: bold;
   width: 100%;
 }
-
 .error-msg {
   color: #EF4444;
   margin-top: 10px;
   display: none;
 }
-
-/* =========================
-   المحتوى
-========================= */
-
 #mainContent {
   display: none;
   max-width: 700px;
   margin: 0 auto;
 }
-
 .control-panel {
   background: var(--panel-bg);
   padding: 18px;
@@ -157,7 +125,6 @@ h2 {
   flex-direction: column;
   gap: 12px;
 }
-
 .control-group {
   display: flex;
   justify-content: space-between;
@@ -166,7 +133,6 @@ h2 {
   font-size: 15px;
   font-weight: bold;
 }
-
 .control-group input,
 .control-group select {
   background: var(--input-bg);
@@ -179,11 +145,6 @@ h2 {
   width: 60%;
   text-align: center;
 }
-
-/* =========================
-   الطلاب
-========================= */
-
 .student-row {
   background: var(--panel-bg);
   padding: 12px 15px;
@@ -194,7 +155,6 @@ h2 {
   gap: 10px;
   box-shadow: 0 4px 6px rgba(0,0,0,0.2);
 }
-
 @media(min-width: 500px) {
   .student-row {
     flex-direction: row;
@@ -202,22 +162,15 @@ h2 {
     align-items: center;
   }
 }
-
 .student-name {
   font-size: 15px;
   font-weight: bold;
 }
-
-/* =========================
-   الحالات
-========================= */
-
 .radio-group {
   display: flex;
   gap: 6px;
   flex-wrap: wrap;
 }
-
 .radio-group label {
   background: var(--input-bg);
   padding: 6px 12px;
@@ -227,41 +180,12 @@ h2 {
   user-select: none;
   font-weight: bold;
 }
-
-.radio-group input {
-  display: none;
-}
-
-.radio-group span {
-  display: inline-block;
-  padding: 2px 6px;
-  border-radius: 4px;
-}
-
-.radio-group input:checked + span.present {
-  background: #22C55E;
-  color: #fff;
-}
-
-.radio-group input:checked + span.absent {
-  background: #EF4444;
-  color: #fff;
-}
-
-.radio-group input:checked + span.late {
-  background: #EAB308;
-  color: #000;
-}
-
-.radio-group input:checked + span.excused {
-  background: #0EA5E9;
-  color: #fff;
-}
-
-/* =========================
-   الحفظ
-========================= */
-
+.radio-group input { display: none; }
+.radio-group span { display: inline-block; padding: 2px 6px; border-radius: 4px; }
+.radio-group input:checked + span.present { background: #22C55E; color: #fff; }
+.radio-group input:checked + span.absent { background: #EF4444; color: #fff; }
+.radio-group input:checked + span.late { background: #EAB308; color: #000; }
+.radio-group input:checked + span.excused { background: #0EA5E9; color: #fff; }
 .save-btn {
   background: #3B82F6;
   color: #fff;
@@ -274,16 +198,8 @@ h2 {
   font-weight: bold;
   margin-top: 20px;
 }
-
-.save-btn:hover {
-  background: var(--btn-hover);
-}
-
-.save-btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
+.save-btn:hover { background: var(--btn-hover); }
+.save-btn:disabled { opacity: 0.6; cursor: not-allowed; }
 .loading {
   text-align: center;
   color: #38BDF8;
@@ -291,564 +207,215 @@ h2 {
   margin-top: 10px;
   font-weight: bold;
 }
-
 </style>
-
 </head>
 
 <body data-theme="blue">
 
-<!-- =========================
-     شاشة القفل
-========================= -->
-
 <div id="lockScreen">
-
   <div class="lock-box">
-
     <h3>🔒 لوحة التحضير محمية</h3>
-
-    <p style="color:#94A3B8">
-      الرجاء إدخال الرقم السري
-    </p>
-
-    <input
-      type="password"
-      id="pinInput"
-      placeholder="****"
-      maxlength="4"
-    >
-
+    <p style="color:#94A3B8">الرجاء إدخال الرقم السري</p>
+    <input type="password" id="pinInput" placeholder="****" maxlength="4">
     <br>
-
-    <button onclick="checkPin()">
-      دخول
-    </button>
-
-    <div id="errorMsg" class="error-msg">
-      الرقم السري غير صحيح!
-    </div>
-
+    <button onclick="checkPin()">دخول</button>
+    <div id="errorMsg" class="error-msg">الرقم السري غير صحيح!</div>
   </div>
-
 </div>
 
-<!-- =========================
-     الصفحة
-========================= -->
-
 <div id="mainContent">
-
   <h2>📋 تحضير الصف الخامس أ</h2>
 
   <div class="control-panel">
-
     <div class="control-group">
-
       <span>🎨 اختر الثيم:</span>
-
-      <select
-        id="themeSelect"
-        onchange="changeTheme(this.value)"
-      >
-
-        <option value="blue">
-          🔵 أزرق ملكي
-        </option>
-
-        <option value="dark">
-          🌙 داكن فاخر
-        </option>
-
-        <option value="light">
-          ☀️ فاتح نظيف
-        </option>
-
-        <option value="green">
-          🌲 أخضر هادئ
-        </option>
-
+      <select id="themeSelect" onchange="changeTheme(this.value)">
+        <option value="blue">🔵 أزرق ملكي</option>
+        <option value="dark">🌙 داكن فاخر</option>
+        <option value="light">☀️ فاتح نظيف</option>
+        <option value="green">🌲 أخضر هادئ</option>
       </select>
-
     </div>
 
     <div class="control-group">
-
       <span>📅 التاريخ:</span>
-
-      <input
-        type="date"
-        id="attendanceDate"
-      >
-
+      <input type="date" id="attendanceDate">
     </div>
 
     <div class="control-group">
-
       <span>📆 اليوم الدراسي:</span>
-
       <select id="attendanceDay">
-
         <option value="الأحد">الأحد</option>
         <option value="الإثنين">الإثنين</option>
         <option value="الثلاثاء">الثلاثاء</option>
         <option value="الأربعاء">الأربعاء</option>
         <option value="الخميس">الخميس</option>
-
       </select>
-
     </div>
-
-    <div class="control-group">
-
-      <span>📚 الفصل الدراسي:</span>
-
-      <select id="semester">
-
-        <option value="الفصل الدراسي الأول">
-          الفصل الدراسي الأول
-        </option>
-
-        <option value="الفصل الدراسي الثاني">
-          الفصل الدراسي الثاني
-        </option>
-
-      </select>
-
-    </div>
-
   </div>
 
   <div id="formContainer"></div>
 
-  <button
-    class="save-btn"
-    id="saveButton"
-    onclick="sendToGoogleSheet()"
-  >
+  <button class="save-btn" id="saveButton" onclick="sendToGoogleSheet()">
     💾 حفظ التحضير
   </button>
 
-  <div
-    id="loadingText"
-    class="loading"
-  >
+  <div id="loadingText" class="loading">
     ⏳ جاري الحفظ...
   </div>
-
 </div>
 
 <script>
-
 // =====================================================
-// رابط Google Apps Script — الصف الخامس أ
+// رابط تطبيق الويب الخاص بك (جاهز ومربوط)
 // =====================================================
-
-const SCRIPT_URL =
-"https://script.google.com/macros/s/AKfycbwm1EVgvIhBMl1avanIjUt5lfQlAiFWj2jFGmq8X6Sh1wHClqEdId7da-WL_mSfzNtI/exec";
-
-// =====================================================
-// الثيم
-// =====================================================
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwm1EVgvIhBMl1avanIjUt5lfQlAiFWj2jFGmq8X6Sh1wHClqEdId7da-WL_mSfzNtI/exec";
 
 function changeTheme(themeName) {
-
-  document.body.setAttribute(
-    "data-theme",
-    themeName
-  );
-
-  localStorage.setItem(
-    "school_theme",
-    themeName
-  );
-
+  document.body.setAttribute("data-theme", themeName);
+  localStorage.setItem("school_theme", themeName);
 }
 
-const savedTheme =
-  localStorage.getItem("school_theme");
-
+const savedTheme = localStorage.getItem("school_theme");
 if (savedTheme) {
-
-  document.body.setAttribute(
-    "data-theme",
-    savedTheme
-  );
-
+  document.body.setAttribute("data-theme", savedTheme);
 }
-
-// =====================================================
-// التاريخ
-// =====================================================
 
 const today = new Date();
-
-document.getElementById(
-  "attendanceDate"
-).valueAsDate = today;
-
-// =====================================================
-// اليوم
-// =====================================================
+document.getElementById("attendanceDate").valueAsDate = today;
 
 const daysMap = {
-
   Sunday: "الأحد",
   Monday: "الإثنين",
   Tuesday: "الثلاثاء",
   Wednesday: "الأربعاء",
   Thursday: "الخميس"
-
 };
 
-const currentDayName =
-
-  new Intl.DateTimeFormat(
-    "en-US",
-    { weekday: "long" }
-  ).format(today);
-
+const currentDayName = new Intl.DateTimeFormat("en-US", { weekday: "long" }).format(today);
 if (daysMap[currentDayName]) {
-
-  document.getElementById(
-    "attendanceDay"
-  ).value =
-    daysMap[currentDayName];
-
+  document.getElementById("attendanceDay").value = daysMap[currentDayName];
 }
-
-// =====================================================
-// الرقم السري
-// =====================================================
 
 function checkPin() {
-
-  const pin =
-    document.getElementById(
-      "pinInput"
-    ).value;
-
+  const pin = document.getElementById("pinInput").value;
   if (pin === "1234") {
-
-    document.getElementById(
-      "lockScreen"
-    ).style.display = "none";
-
-    document.getElementById(
-      "mainContent"
-    ).style.display = "block";
-
-    document.getElementById(
-      "themeSelect"
-    ).value =
-      localStorage.getItem(
-        "school_theme"
-      ) || "blue";
-
+    document.getElementById("lockScreen").style.display = "none";
+    document.getElementById("mainContent").style.display = "block";
+    document.getElementById("themeSelect").value = localStorage.getItem("school_theme") || "blue";
+  } else {
+    document.getElementById("errorMsg").style.display = "block";
+    document.getElementById("pinInput").value = "";
   }
-
-  else {
-
-    document.getElementById(
-      "errorMsg"
-    ).style.display = "block";
-
-    document.getElementById(
-      "pinInput"
-    ).value = "";
-
-  }
-
 }
 
-document.getElementById(
-  "pinInput"
-).addEventListener(
-  "keypress",
-  function(event) {
-
-    if (event.key === "Enter") {
-
-      checkPin();
-
-    }
-
+document.getElementById("pinInput").addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+    checkPin();
   }
-);
+});
 
-// =====================================================
-// أسماء الطلاب — الصف الخامس أ
-// =====================================================
-
+// قائمة طلاب الصف الخامس أ (مطابقة للسكربت تماماً)
 const studentsList = [
-
   "أحمد باسم يوسف الشيخ",
-
   "أصيل شاهين بن مبارك الهندي",
-
   "أنس محمد رشدان الحربي",
-
   "أنس منصور بن دخيل الله الساطي",
-
   "ابراهيم احمد عبدالغنى السلمى",
-
   "احمد محمد احمد الصعيدي",
-
   "اديب يسري عبود الصعيدي",
-
   "ايهاب مفيد جبر المسعودى",
-
   "بتال مراد بن مطلق الصعيدي",
-
   "بتال ياسين عبدالحفيظ الجبرتي",
-
   "تميم فهد عبدالله السلمي",
-
   "جاسر هاني بركات المحلبدي",
-
   "حاتم لطفي بن عبدالعزيز المغربي",
-
   "رائف علاء بن عبدالرحمن الصعيدي",
-
   "زياد جلال راجح المولد",
-
   "سند معتز مغيث الصعيدي",
-
   "صهيب علي محمد الحسيني",
-
   "عبدالرحيم طلعت بن عبدالرحيم الشعيبي",
-
   "عبدالعزيز خالد رجاء المحلبدي",
-
   "عدي طارق براك المحلبدي",
-
   "فيصل وجيه نبيه المغربي",
-
   "كنان رضا محمد الشيخ",
-
   "محمد حسن عمر هارون",
-
   "محمد سامي بن محمد الصعيدي",
-
   "محمد عبدالله  ادريس"
-
 ];
 
-// =====================================================
-// إنشاء الطلاب
-// =====================================================
+const container = document.getElementById("formContainer");
 
-const container =
-  document.getElementById(
-    "formContainer"
-  );
-
-studentsList.forEach(
-  function(name, index) {
-
-    const row =
-      document.createElement("div");
-
-    row.className =
-      "student-row";
-
-    row.innerHTML = `
-
-      <span class="student-name">
-        ${index + 1}. ${name}
-      </span>
-
-      <div class="radio-group">
-
-        <label>
-
-          <input
-            type="radio"
-            name="status_${index}"
-            value="حاضر"
-            checked
-          >
-
-          <span class="present">
-            حاضر
-          </span>
-
-        </label>
-
-        <label>
-
-          <input
-            type="radio"
-            name="status_${index}"
-            value="غائب"
-          >
-
-          <span class="absent">
-            غائب
-          </span>
-
-        </label>
-
-        <label>
-
-          <input
-            type="radio"
-            name="status_${index}"
-            value="متأخر"
-          >
-
-          <span class="late">
-            متأخر
-          </span>
-
-        </label>
-
-        <label>
-
-          <input
-            type="radio"
-            name="status_${index}"
-            value="غياب بعذر"
-          >
-
-          <span class="excused">
-            بعذر
-          </span>
-
-        </label>
-
-      </div>
-
-    `;
-
-    container.appendChild(row);
-
-  }
-);
-
-// =====================================================
-// إرسال إلى Google Sheets
-// =====================================================
+studentsList.forEach(function(name, index) {
+  const row = document.createElement("div");
+  row.className = "student-row";
+  row.innerHTML = `
+    <span class="student-name">
+      ${index + 1}. ${name}
+    </span>
+    <div class="radio-group">
+      <label>
+        <input type="radio" name="status_${index}" value="حاضر" checked>
+        <span class="present">حاضر</span>
+      </label>
+      <label>
+        <input type="radio" name="status_${index}" value="غائب">
+        <span class="absent">غائب</span>
+      </label>
+      <label>
+        <input type="radio" name="status_${index}" value="متأخر">
+        <span class="late">متأخر</span>
+      </label>
+      <label>
+        <input type="radio" name="status_${index}" value="غياب بعذر">
+        <span class="excused">بعذر</span>
+      </label>
+    </div>
+  `;
+  container.appendChild(row);
+});
 
 async function sendToGoogleSheet() {
-
-  const dateVal =
-    document.getElementById(
-      "attendanceDate"
-    ).value;
-
+  const dateVal = document.getElementById("attendanceDate").value;
   if (!dateVal) {
-
-    alert(
-      "⚠️ الرجاء تحديد التاريخ أولاً"
-    );
-
+    alert("⚠️ الرجاء تحديد التاريخ أولاً");
     return;
-
   }
 
   const dailyRecord = {
-
     date: dateVal,
-
-    day:
-      document.getElementById(
-        "attendanceDay"
-      ).value,
-
-    semester:
-      document.getElementById(
-        "semester"
-      ).value,
-
+    day: document.getElementById("attendanceDay").value,
     students: {}
-
   };
 
-  studentsList.forEach(
-    function(name, index) {
+  studentsList.forEach(function(name, index) {
+    const selectedRadio = document.querySelector(`input[name="status_${index}"]:checked`);
+    dailyRecord.students[name] = selectedRadio ? selectedRadio.value : "حاضر";
+  });
 
-      const selectedRadio =
-        document.querySelector(
-          `input[name="status_${index}"]:checked`
-        );
-
-      dailyRecord.students[name] =
-
-        selectedRadio
-          ? selectedRadio.value
-          : "حاضر";
-
-    }
-  );
-
-  const saveButton =
-    document.getElementById(
-      "saveButton"
-    );
-
-  const loadingText =
-    document.getElementById(
-      "loadingText"
-    );
+  const saveButton = document.getElementById("saveButton");
+  const loadingText = document.getElementById("loadingText");
 
   saveButton.disabled = true;
-
-  loadingText.style.display =
-    "block";
+  loadingText.style.display = "block";
 
   try {
+    await fetch(SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",
+      body: JSON.stringify(dailyRecord)
+    });
 
-    await fetch(
-
-      SCRIPT_URL,
-
-      {
-
-        method: "POST",
-
-        mode: "no-cors",
-
-        body:
-          JSON.stringify(
-            dailyRecord
-          )
-
-      }
-
-    );
-
-    loadingText.style.display =
-      "none";
-
-    saveButton.disabled =
-      false;
-
-    alert(
-      "✅ تم حفظ تحضير الصف الخامس أ بنجاح"
-    );
-
+    loadingText.style.display = "none";
+    saveButton.disabled = false;
+    alert("✅ تم حفظ تحضير الصف الخامس أ بنجاح");
+  } catch (error) {
+    loadingText.style.display = "none";
+    saveButton.disabled = false;
+    alert("❌ حدث خطأ أثناء الحفظ\n\n" + error.message);
   }
-
-  catch (error) {
-
-    loadingText.style.display =
-      "none";
-
-    saveButton.disabled =
-      false;
-
-    alert(
-      "❌ حدث خطأ أثناء الحفظ\n\n" +
-      error.message
-    );
-
-  }
-
 }
-
 </script>
 
 </body>
-
 </html>
