@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>مركزية غياب الطلاب</title>
+
+<style>
+
+:root {
+  --bg: #07111f;
+  --card: #0f1d31;
+  --card2: #13243b;
+  --border: rgba(255,255,255,.08);
+  --text: #f8fafc;
+  --muted: #94a3b8;
+  --blue: #38bdf8;
+  --blue2: #2563eb;
+  --red: #ef4444;
+  --red-soft: #3f1418;
+  --green: #22c55e;
+  --shadow: 0 18px 45px rgba(0,0,0,.28);
+}
+
+* {
+  box-sizing: border-box;
+  font-family: Arial, Tahoma, sans-serif;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top right, rgba(37,99,235,.20), transparent 30%),
+    radial-gradient(circle at bottom left, rgba(56,189,248,.10), transparent 30%),
+    var(--bg);
+  color: var(--text);
+  padding: 18px;
+}
+
+.container {
+  width: 100%;
+  max-width: 850px;
+  margin: auto;
+}
+
+
+/* ================= HEADER ================= */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(145deg, #10233d, #0c1728);
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  padding: 28px 22px;
+  box-shadow: var(--shadow);
+  margin-bottom: 18px;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  background: rgba(56,189,248,.12);
+  border-radius: 50%;
+  left: -70px;
+  top: -80px;
+  filter: blur(2px);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-icon {
+  width: 68px;
+  height: 68px;
+  margin: auto;
+  border-radius: 20px;
+  background: linear-gradient(135deg, var(--blue2), var(--blue));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34px;
+  box-shadow: 0 12px 30px rgba(37,99,235,.30);
+}
+
+.hero h1 {
+  text-align: center;
+  margin: 14px 0 8px;
+  font-size: 30px;
+  font-weight: 800;
+}
+
+.hero p {
+  margin: 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+
+/* ================= DATE ================= */
+
+.date-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 18px;
+  box-shadow: var(--shadow);
+  margin-bottom: 18px;
+}
+
+.date-label {
+  color: var(--muted);
+  font-size: 13px;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.date-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+input[type="date"] {
+  flex: 1;
+  min-width: 0;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: #091525;
+  color: white;
+  font-size: 16px;
+  outline: none;
+}
+
+input[type="date"]:focus {
+  border-color: var(--blue);
+}
+
+.refresh-btn {
+  width: 54px;
+  height: 54px;
+  border: 0;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #2563eb, #38bdf8);
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(37,99,235,.25);
+}
+
+.refresh-btn:disabled {
+  opacity: .55;
+  cursor: wait;
+}
+
+
+/* ================= CLASS BUTTONS ================= */
+
+.section-title {
+  margin: 5px 2px 12px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.classes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.class-btn {
+  border: 1px solid var(--border);
+  border-radius: 19px;
+  padding: 18px 10px;
+  background: var(--card);
+  color: white;
+  cursor: pointer;
+  transition: .2s;
+  box-shadow: var(--shadow);
+}
+
+.class-btn:hover {
+  transform: translateY(-2px);
+  border-color: rgba(56,189,248,.45);
+}
+
+.class-btn.active {
+  background: linear-gradient(145deg, #173b67, #102541);
+  border-color: rgba(56,189,248,.65);
+  box-shadow: 0 10px 28px rgba(37,99,235,.20);
+}
+
+.class-icon {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.class-name {
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.class-sub {
+  margin-top: 5px;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.all-btn {
+  width: 100%;
+  border: 1px solid rgba(239,68,68,.20);
+  border-radius: 18px;
+  padding: 18px;
+  background: linear-gradient(145deg, #32181c, #211116);
+  color: white;
+  cursor: pointer;
+  margin-bottom: 18px;
+  box-shadow: var(--shadow);
+  transition: .2s;
+}
+
+.all-btn:hover,
+.all-btn.active {
+  border-color: rgba(239,68,68,.6);
+  transform: translateY(-2px);
+}
+
+.all-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.all-icon {
+  font-size: 28px;
+}
+
+.all-text {
+  font-size: 17px;
+  font-weight: 800;
+}
+
+
+/* ================= SUMMARY ================= */
+
+.summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.summary-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 18px;
+  box-shadow: var(--shadow);
+}
+
+.summary-label {
+  color: var(--muted);
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.summary-value {
+  font-size: 34px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.summary-value.red {
+  color: #f87171;
+}
+
+.summary-value.blue {
+  color: var(--blue);
+}
+
+
+/* ================= RESULTS ================= */
+
+.results-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 18px;
+  box-shadow: var(--shadow);
+}
+
+.results-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 14px;
+}
+
+.results-title {
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.selected-class {
+  color: var(--blue);
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.student {
+  background: linear-gradient(145deg, #34161a, #251317);
+  border: 1px solid rgba(239,68,68,.14);
+  border-radius: 17px;
+  padding: 15px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.student:last-child {
+  margin-bottom: 0;
+}
+
+.student-main {
+  min-width: 0;
+}
+
+.student-name {
+  font-weight: 800;
+  font-size: 16px;
+  line-height: 1.6;
+  word-break: break-word;
+}
+
+.student-meta {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+.class-tag {
+  display: inline-block;
+  padding: 6px 9px;
+  border-radius: 9px;
+  background: rgba(56,189,248,.10);
+  color: #7dd3fc;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.absence-tag {
+  display: inline-block;
+  padding: 6px 9px;
+  border-radius: 9px;
+  background: rgba(239,68,68,.12);
+  color: #fca5a5;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.person-icon {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  border-radius: 14px;
+  background: rgba(239,68,68,.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+
+
+/* ================= STATES ================= */
+
+.empty,
+.loading {
+  text-align: center;
+  padding: 45px 15px;
+  color: var(--muted);
+  font-size: 16px;
+}
+
+.loading-icon {
+  font-size: 34px;
+  margin-bottom: 10px;
+  animation: pulse 1.2s infinite;
+}
+
+@keyframes pulse {
+
+  0%,100% {
+    transform: scale(1);
+    opacity: .65;
+  }
+
+  50% {
+    transform: scale(1.12);
+    opacity: 1;
+  }
+
+}
+
+.error {
+  background: #351419;
+  border: 1px solid rgba(239,68,68,.25);
+  color: #fecaca;
+  border-radius: 15px;
+  padding: 18px;
+  text-align: center;
+  line-height: 1.8;
+}
+
+
+/* ================= FOOTER ================= */
+
+.footer {
+  text-align: center;
+  color: #64748b;
+  font-size: 11px;
+  padding: 18px 0 5px;
+}
+
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 650px) {
+
+  body {
+    padding: 10px;
+  }
+
+  .hero {
+    padding: 22px 15px;
+    border-radius: 22px;
+  }
+
+  .hero h1 {
+    font-size: 24px;
+  }
+
+  .classes {
+    grid-template-columns: 1fr;
+  }
+
+  .class-btn {
+    padding: 15px;
+  }
+
+  .class-icon {
+    display: inline-block;
+    margin-left: 8px;
+    margin-bottom: 0;
+  }
+
+  .class-sub {
+    display: inline-block;
+    margin-right: 6px;
+  }
+
+  .summary-value {
+    font-size: 28px;
+  }
+
+  .student-name {
+    font-size: 14px;
+  }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+
+<!-- HEADER -->
+
+<div class="hero">
+
+  <div class="hero-content">
+
+    <div class="hero-icon">
+      📋
+    </div>
+
+    <h1>
+      مركزية غياب الطلاب
+    </h1>
+
+    <p>
+      متابعة الغياب اليومي لجميع الصفوف
+    </p>
+
+  </div>
+
+</div>
+
+
+<!-- DATE -->
+
+<div class="date-card">
+
+  <div class="date-label">
+    📅 تاريخ التحضير
+  </div>
+
+  <div class="date-row">
+
+    <input
+      type="date"
+      id="dateInput"
+    >
+
+    <button
+      class="refresh-btn"
+      id="refreshBtn"
+      onclick="loadAbsentees()"
+      title="تحديث"
+    >
+      🔄
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- CLASSES -->
+
+<div class="section-title">
+  🏫 اختر الصف
+</div>
+
+
+<div class="classes">
+
+
+  <button
+    class="class-btn active"
+    id="btn-firstA"
+    onclick="selectClass('firstA')"
+  >
+
+    <div class="class-icon">
+      🟦
+    </div>
+
+    <div class="class-name">
+      الصف الأول أ
+    </div>
+
+    <div class="class-sub">
+      عرض الغياب
+    </div>
+
+  </button>
+
+
+  <button
+    class="class-btn"
+    id="btn-secondA"
+    onclick="selectClass('secondA')"
+  >
+
+    <div class="class-icon">
+      🟩
+    </div>
+
+    <div class="class-name">
+      الصف الثاني أ
+    </div>
+
+    <div class="class-sub">
+      عرض الغياب
+    </div>
+
+  </button>
+
+
+  <button
+    class="class-btn"
+    id="btn-secondB"
+    onclick="selectClass('secondB')"
+  >
+
+    <div class="class-icon">
+      🟦
+    </div>
+
+    <div class="class-name">
+      الصف الثاني ب
+    </div>
+
+    <div class="class-sub">
+      عرض الغياب
+    </div>
+
+  </button>
+
+
+  <button
+    class="class-btn"
+    id="btn-thirdA"
+    onclick="selectClass('thirdA')"
+  >
+
+    <div class="class-icon">
+      🟩
+    </div>
+
+    <div class="class-name">
+      الصف الثالث أ
+    </div>
+
+    <div class="class-sub">
+      عرض الغياب
+    </div>
+
+  </button>
+
+
+  <button
+    class="class-btn"
+    id="btn-thirdB"
+    onclick="selectClass('thirdB')"
+  >
+
+    <div class="class-icon">
+      🟦
+    </div>
+
+    <div class="class-name">
+      الصف الثالث ب
+    </div>
+
+    <div class="class-sub">
+      عرض الغياب
+    </div>
+
+  </button>
+
+
+  <button
+    class="class-btn"
+    id="btn-fourthA"
+    onclick="selectClass('fourthA')"
+  >
+
+    <div class="class-icon">
+      🟩
+    </div>
+
+    <div class="class-name">
+      الصف الرابع أ
+    </div>
+
+    <div class="class-sub">
+      عرض الغياب
+    </div>
+
+  </button>
+
+
+  <button
+    class="class-btn"
+    id="btn-fourthB"
+    onclick="selectClass('fourthB')"
+  >
+
+    <div class="class-icon">
+      🟦
+    </div>
+
+    <div class="class-name">
+      الصف الرابع ب
+    </div>
+
+    <div class="class-sub">
+      عرض الغياب
+    </div>
+
+  </button>
+
+
+  <button
+    class="class-btn"
+    id="btn-fifthA"
+    onclick="selectClass('fifthA')"
+  >
+
+    <div class="class-icon">
+      🟩
+    </div>
+
+    <div class="class-name">
+      الصف الخامس أ
+    </div>
+
+    <div class="class-sub">
+      عرض الغياب
+    </div>
+
+  </button>
+
+
+  <button
+    class="class-btn"
+    id="btn-fifthB"
+    onclick="selectClass('fifthB')"
+  >
+
+    <div class="class-icon">
+      🟦
+    </div>
+
+    <div class="class-name">
+      الصف الخامس ب
+    </div>
+
+    <div class="class-sub">
+      عرض الغياب
+    </div>
+
+  </button>
+
+
+  <button
+    class="class-btn"
+    id="btn-sixthA"
+    onclick="selectClass('sixthA')"
+  >
+
+    <div class="class-icon">
+      🟩
+    </div>
+
+    <div class="class-name">
+      الصف السادس أ
+    </div>
+
+    <div class="class-sub">
+      عرض الغياب
+    </div>
+
+  </button>
+
+
+  <button
+    class="class-btn"
+    id="btn-sixthB"
+    onclick="selectClass('sixthB')"
+  >
+
+    <div class="class-icon">
+      🟦
+    </div>
+
+    <div class="class-name">
+      الصف السادس ب
+    </div>
+
+    <div class="class-sub">
+      عرض الغياب
+    </div>
+
+  </button>
+
+
+</div>
+
+
+<!-- ALL -->
+
+<button
+  class="all-btn"
+  id="btn-all"
+  onclick="selectClass('all')"
+>
+
+  <div class="all-content">
+
+    <div class="all-icon">
+      👥
+    </div>
+
+    <div class="all-text">
+      جميع الغائبين من كل الصفوف
+    </div>
+
+  </div>
+
+</button>
+
+
+<!-- SUMMARY -->
+
+<div class="summary">
+
+
+  <div class="summary-card">
+
+    <div class="summary-label">
+      👤 إجمالي الغياب
+    </div>
+
+    <div
+      class="summary-value red"
+      id="count"
+    >
+      0
+    </div>
+
+  </div>
+
+
+  <div class="summary-card">
+
+    <div class="summary-label">
+      📅 التاريخ المحدد
+    </div>
+
+    <div
+      class="summary-value blue"
+      id="selectedDate"
+      style="font-size:19px; line-height:1.4;"
+    >
+      —
+    </div>
+
+  </div>
+
+
+</div>
+
+
+<!-- RESULTS -->
+
+<div class="results-card">
+
+
+  <div class="results-header">
+
+    <div class="results-title">
+      🚫 قائمة الغياب
+    </div>
+
+    <div
+      class="selected-class"
+      id="selectedClass"
+    >
+      الصف الأول أ
+    </div>
+
+  </div>
+
+
+  <div id="results">
+
+    <div class="empty">
+      📅 اختر التاريخ ثم اضغط تحديث
+    </div>
+
+  </div>
+
+
+</div>
+
+
+<div class="footer">
+  نظام متابعة الغياب المدرسي
+</div>
+
+
+</div>
+
+
+<script>
+
+
+let currentClass = "firstA";
+
+
+// =====================================================
+// التاريخ الحالي
+// =====================================================
+
+function setToday() {
+
+  const now =
+    new Date();
+
+  const year =
+    now.getFullYear();
+
+  const month =
+    String(
+      now.getMonth() + 1
+    ).padStart(2, "0");
+
+  const day =
+    String(
+      now.getDate()
+    ).padStart(2, "0");
+
+
+  document.getElementById(
+    "dateInput"
+  ).value =
+    year +
+    "-" +
+    month +
+    "-" +
+    day;
+
+}
+
+
+// =====================================================
+// أسماء الصفوف
+// =====================================================
+
+const classNames = {
+
+  firstA:
+    "الصف الأول أ",
+
+  secondA:
+    "الصف الثاني أ",
+
+  secondB:
+    "الصف الثاني ب",
+
+  thirdA:
+    "الصف الثالث أ",
+
+  thirdB:
+    "الصف الثالث ب",
+
+  fourthA:
+    "الصف الرابع أ",
+
+  fourthB:
+    "الصف الرابع ب",
+
+  fifthA:
+    "الصف الخامس أ",
+
+  fifthB:
+    "الصف الخامس ب",
+
+  sixthA:
+    "الصف السادس أ",
+
+  sixthB:
+    "الصف السادس ب",
+
+  all:
+    "جميع الغائبين"
+
+};
+
+
+// =====================================================
+// اختيار الصف
+// =====================================================
+
+function selectClass(classKey) {
+
+  currentClass =
+    classKey;
+
+
+  document
+    .querySelectorAll(
+      ".class-btn"
+    )
+    .forEach(
+      function(btn) {
+
+        btn.classList.remove(
+          "active"
+        );
+
+      }
+    );
+
+
+  const allButton =
+    document.getElementById(
+      "btn-all"
+    );
+
+
+  allButton.classList.remove(
+    "active"
+  );
+
+
+  if (
+    classKey === "all"
+  ) {
+
+    allButton.classList.add(
+      "active"
+    );
+
+  } else {
+
+    const button =
+      document.getElementById(
+        "btn-" +
+        classKey
+      );
+
+
+    if (button) {
+
+      button.classList.add(
+        "active"
+      );
+
+    }
+
+  }
+
+
+  document.getElementById(
+    "selectedClass"
+  ).textContent =
+    classNames[classKey];
+
+
+  loadAbsentees();
+
+}
+
+
+// =====================================================
+// تحميل الغياب
+// =====================================================
+
+function loadAbsentees() {
+
+  const date =
+    document.getElementById(
+      "dateInput"
+    ).value;
+
+
+  const button =
+    document.getElementById(
+      "refreshBtn"
+    );
+
+
+  const results =
+    document.getElementById(
+      "results"
+    );
+
+
+  const count =
+    document.getElementById(
+      "count"
+    );
+
+
+  const selectedDate =
+    document.getElementById(
+      "selectedDate"
+    );
+
+
+  if (!date) {
+
+    alert(
+      "⚠️ اختر التاريخ أولاً"
+    );
+
+    return;
+
+  }
+
+
+  button.disabled =
+    true;
+
+
+  button.textContent =
+    "⏳";
+
+
+  count.textContent =
+    "0";
+
+
+  selectedDate.textContent =
+    date;
+
+
+  results.innerHTML = `
+
+    <div class="loading">
+
+      <div class="loading-icon">
+        ⏳
+      </div>
+
+      جاري تحديث قائمة الغياب...
+
+    </div>
+
+  `;
+
+
+  google.script.run
+
+    .withSuccessHandler(
+      function(data) {
+
+
+        button.disabled =
+          false;
+
+
+        button.textContent =
+          "🔄";
+
+
+        if (!data) {
+
+          showError(
+            "لم تصل بيانات من النظام"
+          );
+
+          return;
+
+        }
+
+
+        if (
+          data.success !== true
+        ) {
+
+          showError(
+            data.message ||
+            "حدث خطأ أثناء جلب البيانات"
+          );
+
+          return;
+
+        }
+
+
+        const students =
+          Array.isArray(
+            data.students
+          )
+            ? data.students
+            : [];
+
+
+        count.textContent =
+          students.length;
+
+
+        if (
+          students.length === 0
+        ) {
+
+          results.innerHTML = `
+
+            <div class="empty">
+
+              <div
+                style="
+                  font-size:38px;
+                  margin-bottom:10px;
+                "
+              >
+                ✅
+              </div>
+
+              لا يوجد غياب لهذا الصف
+              في التاريخ المحدد
+
+            </div>
+
+          `;
+
+          return;
+
+        }
+
+
+        renderStudents(
+          students
+        );
+
+      }
+    )
+
+
+    .withFailureHandler(
+      function(error) {
+
+
+        button.disabled =
+          false;
+
+
+        button.textContent =
+          "🔄";
+
+
+        showError(
+
+          error &&
+          error.message
+
+            ? error.message
+
+            : String(error)
+
+        );
+
+      }
+    )
+
+
+    .getAbsentees({
+
+      classKey:
+        currentClass,
+
+      date:
+        date
+
+    });
+
+}
+
+
+// =====================================================
+// عرض الطلاب
+// =====================================================
+
+function renderStudents(
+  students
+) {
+
+  const results =
+    document.getElementById(
+      "results"
+    );
+
+
+  let html = "";
+
+
+  students.forEach(
+    function(student) {
+
+
+      html += `
+
+        <div class="student">
+
+          <div class="student-main">
+
+            <div class="student-name">
+
+              👤 ${
+                escapeHtml(
+                  student.studentName ||
+                  ""
+                )
+              }
+
+            </div>
+
+
+            <div class="student-meta">
+
+              <span class="class-tag">
+
+                🏫 ${
+                  escapeHtml(
+                    student.className ||
+                    ""
+                  )
+                }
+
+              </span>
+
+
+              <span class="absence-tag">
+
+                🚫 غائب
+
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="person-icon">
+            👤
+          </div>
+
+        </div>
+
+      `;
+
+    }
+  );
+
+
+  results.innerHTML =
+    html;
+
+}
+
+
+// =====================================================
+// عرض الخطأ
+// =====================================================
+
+function showError(
+  message
+) {
+
+  document.getElementById(
+    "results"
+  ).innerHTML = `
+
+    <div class="error">
+
+      ❌ حدث خطأ
+
+      <br><br>
+
+      ${
+        escapeHtml(
+          message
+        )
+      }
+
+    </div>
+
+  `;
+
+}
+
+
+// =====================================================
+// حماية النص
+// =====================================================
+
+function escapeHtml(
+  text
+) {
+
+  if (
+    text === null ||
+    text === undefined
+  ) {
+
+    return "";
+
+  }
+
+
+  return String(text)
+
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+
+    .replace(
+      /</g,
+      "&lt;"
+    )
+
+    .replace(
+      />/g,
+      "&gt;"
+    )
+
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+
+    .replace(
+      /'/g,
+      "&#039;"
+    );
+
+}
+
+
+// =====================================================
+// التشغيل الأول
+// =====================================================
+
+setToday();
+
+</script>
+
+</body>
+</html>
