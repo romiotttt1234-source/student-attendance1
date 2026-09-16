@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>تحضير الصف الرابع أ</title>
+
+<style>
+
+:root {
+  --bg-color: #0F172A;
+  --panel-bg: #1E293B;
+  --text-color: #FFFFFF;
+  --accent-color: #60A5FA;
+  --input-bg: #334155;
+  --btn-hover: #1D4ED8;
+}
+
+[data-theme="blue"] {
+  --bg-color: #0B132B;
+  --panel-bg: #1C2541;
+  --text-color: #FFFFFF;
+  --accent-color: #4CC9F0;
+  --input-bg: #3A506B;
+  --btn-hover: #4361EE;
+}
+
+[data-theme="dark"] {
+  --bg-color: #0F172A;
+  --panel-bg: #1E293B;
+  --text-color: #FFFFFF;
+  --accent-color: #FACC15;
+  --input-bg: #334155;
+  --btn-hover: #16A34A;
+}
+
+[data-theme="light"] {
+  --bg-color: #F1F5F9;
+  --panel-bg: #FFFFFF;
+  --text-color: #0F172A;
+  --accent-color: #2563EB;
+  --input-bg: #E2E8F0;
+  --btn-hover: #15803D;
+}
+
+[data-theme="green"] {
+  --bg-color: #064E3B;
+  --panel-bg: #022C22;
+  --text-color: #FFFFFF;
+  --accent-color: #34D399;
+  --input-bg: #065F46;
+  --btn-hover: #047857;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Cairo, Arial, sans-serif;
+  direction: rtl;
+  background: var(--bg-color);
+  color: var(--text-color);
+  padding: 15px;
+  margin: 0;
+  transition: 0.3s;
+}
+
+h2 {
+  text-align: center;
+  color: var(--accent-color);
+  margin-bottom: 20px;
+  font-weight: 800;
+}
+
+/* =========================
+   شاشة القفل
+========================= */
+
+#lockScreen {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.lock-box {
+  background: var(--panel-bg);
+  padding: 30px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  width: 90%;
+  max-width: 350px;
+}
+
+.lock-box input {
+  background: var(--input-bg);
+  color: var(--text-color);
+  border: none;
+  padding: 12px;
+  font-size: 18px;
+  border-radius: 8px;
+  width: 80%;
+  text-align: center;
+  margin-bottom: 15px;
+  outline: none;
+  letter-spacing: 5px;
+}
+
+.lock-box button {
+  background: #3B82F6;
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  width: 100%;
+}
+
+.error-msg {
+  color: #EF4444;
+  margin-top: 10px;
+  display: none;
+}
+
+/* =========================
+   المحتوى
+========================= */
+
+#mainContent {
+  display: none;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.control-panel {
+  background: var(--panel-bg);
+  padding: 18px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.control-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.control-group input,
+.control-group select {
+  background: var(--input-bg);
+  color: var(--text-color);
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: none;
+  font-size: 14px;
+  outline: none;
+  width: 60%;
+  text-align: center;
+}
+
+/* =========================
+   الطلاب
+========================= */
+
+.student-row {
+  background: var(--panel-bg);
+  padding: 12px 15px;
+  margin: 10px 0;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+
+@media(min-width: 500px) {
+  .student-row {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.student-name {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+/* =========================
+   الحالات
+========================= */
+
+.radio-group {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.radio-group label {
+  background: var(--input-bg);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  user-select: none;
+  font-weight: bold;
+}
+
+.radio-group input {
+  display: none;
+}
+
+.radio-group span {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.radio-group input:checked + span.present {
+  background: #22C55E;
+  color: #fff;
+}
+
+.radio-group input:checked + span.absent {
+  background: #EF4444;
+  color: #fff;
+}
+
+.radio-group input:checked + span.late {
+  background: #EAB308;
+  color: #000;
+}
+
+.radio-group input:checked + span.excused {
+  background: #0EA5E9;
+  color: #fff;
+}
+
+/* =========================
+   الحفظ
+========================= */
+
+.save-btn {
+  background: #3B82F6;
+  color: #fff;
+  border: none;
+  padding: 15px;
+  width: 100%;
+  font-size: 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.save-btn:hover {
+  background: var(--btn-hover);
+}
+
+.save-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.loading {
+  text-align: center;
+  color: #38BDF8;
+  display: none;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+</style>
+
+</head>
+
+<body data-theme="blue">
+
+<!-- =========================
+     شاشة القفل
+========================= -->
+
+<div id="lockScreen">
+
+  <div class="lock-box">
+
+    <h3>🔒 لوحة التحضير محمية</h3>
+
+    <p style="color:#94A3B8">
+      الرجاء إدخال الرقم السري
+    </p>
+
+    <input
+      type="password"
+      id="pinInput"
+      placeholder="****"
+      maxlength="4"
+    >
+
+    <br>
+
+    <button onclick="checkPin()">
+      دخول
+    </button>
+
+    <div id="errorMsg" class="error-msg">
+      الرقم السري غير صحيح!
+    </div>
+
+  </div>
+
+</div>
+
+<!-- =========================
+     الصفحة
+========================= -->
+
+<div id="mainContent">
+
+  <h2>📋 تحضير الصف الرابع أ</h2>
+
+  <div class="control-panel">
+
+    <div class="control-group">
+
+      <span>🎨 اختر الثيم:</span>
+
+      <select
+        id="themeSelect"
+        onchange="changeTheme(this.value)"
+      >
+
+        <option value="blue">
+          🔵 أزرق ملكي
+        </option>
+
+        <option value="dark">
+          🌙 داكن فاخر
+        </option>
+
+        <option value="light">
+          ☀️ فاتح نظيف
+        </option>
+
+        <option value="green">
+          🌲 أخضر هادئ
+        </option>
+
+      </select>
+
+    </div>
+
+    <div class="control-group">
+
+      <span>📅 التاريخ:</span>
+
+      <input
+        type="date"
+        id="attendanceDate"
+      >
+
+    </div>
+
+    <div class="control-group">
+
+      <span>📆 اليوم الدراسي:</span>
+
+      <select id="attendanceDay">
+
+        <option value="الأحد">الأحد</option>
+        <option value="الإثنين">الإثنين</option>
+        <option value="الثلاثاء">الثلاثاء</option>
+        <option value="الأربعاء">الأربعاء</option>
+        <option value="الخميس">الخميس</option>
+
+      </select>
+
+    </div>
+
+    <div class="control-group">
+
+      <span>📚 الفصل الدراسي:</span>
+
+      <select id="semester">
+
+        <option value="الفصل الدراسي الأول">
+          الفصل الدراسي الأول
+        </option>
+
+        <option value="الفصل الدراسي الثاني">
+          الفصل الدراسي الثاني
+        </option>
+
+      </select>
+
+    </div>
+
+  </div>
+
+  <div id="formContainer"></div>
+
+  <button
+    class="save-btn"
+    id="saveButton"
+    onclick="sendToGoogleSheet()"
+  >
+    💾 حفظ التحضير
+  </button>
+
+  <div
+    id="loadingText"
+    class="loading"
+  >
+    ⏳ جاري الحفظ...
+  </div>
+
+</div>
+
+<script>
+
+// =====================================================
+// رابط Google Apps Script — الصف الرابع أ
+// =====================================================
+
+const SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbyD-ZDdu7_7fD180qUzCIlGA-nSB6UsFirAJcBj8HeHtrg2J_C66YCvdL_KalgeMSduLw/exec";
+
+// =====================================================
+// الثيم
+// =====================================================
+
+function changeTheme(themeName) {
+
+  document.body.setAttribute(
+    "data-theme",
+    themeName
+  );
+
+  localStorage.setItem(
+    "school_theme",
+    themeName
+  );
+
+}
+
+const savedTheme =
+  localStorage.getItem("school_theme");
+
+if (savedTheme) {
+
+  document.body.setAttribute(
+    "data-theme",
+    savedTheme
+  );
+
+}
+
+// =====================================================
+// التاريخ
+// =====================================================
+
+const today = new Date();
+
+document.getElementById(
+  "attendanceDate"
+).valueAsDate = today;
+
+// =====================================================
+// اليوم
+// =====================================================
+
+const daysMap = {
+
+  Sunday: "الأحد",
+  Monday: "الإثنين",
+  Tuesday: "الثلاثاء",
+  Wednesday: "الأربعاء",
+  Thursday: "الخميس"
+
+};
+
+const currentDayName =
+
+  new Intl.DateTimeFormat(
+    "en-US",
+    { weekday: "long" }
+  ).format(today);
+
+if (daysMap[currentDayName]) {
+
+  document.getElementById(
+    "attendanceDay"
+  ).value =
+    daysMap[currentDayName];
+
+}
+
+// =====================================================
+// الرقم السري
+// =====================================================
+
+function checkPin() {
+
+  const pin =
+    document.getElementById(
+      "pinInput"
+    ).value;
+
+  if (pin === "1234") {
+
+    document.getElementById(
+      "lockScreen"
+    ).style.display = "none";
+
+    document.getElementById(
+      "mainContent"
+    ).style.display = "block";
+
+    document.getElementById(
+      "themeSelect"
+    ).value =
+      localStorage.getItem(
+        "school_theme"
+      ) || "blue";
+
+  }
+
+  else {
+
+    document.getElementById(
+      "errorMsg"
+    ).style.display = "block";
+
+    document.getElementById(
+      "pinInput"
+    ).value = "";
+
+  }
+
+}
+
+document.getElementById(
+  "pinInput"
+).addEventListener(
+  "keypress",
+  function(event) {
+
+    if (event.key === "Enter") {
+
+      checkPin();
+
+    }
+
+  }
+);
+
+// =====================================================
+// أسماء الطلاب — الصف الرابع أ
+// =====================================================
+
+const studentsList = [
+
+  "اسامه احمد عبيدالله القريقري",
+
+  "آسر وسيم بن عبدربه الشعيبي",
+
+  "الوليد ماهر عايد الحربي",
+
+  "الياس ربيع عبدالجليل عبدالله",
+
+  "أمير سامي عنيت الله الصاطي",
+
+  "راهي بركات بريك المحلبدي",
+
+  "رواد عادل عبدالغني الغانمي",
+
+  "ريان عبيدالله حميد الخرماني",
+
+  "سلمان حميد بن حمدان الجحدلي",
+
+  "سلمان محمد عمران المغربي",
+
+  "سهيل عبدالله  غانم",
+
+  "سيف طلال مطلق الصعيدى",
+
+  "سيف مروان ابن عطيةالله القطان",
+
+  "عبدالرحمن رائد حميد الحربي",
+
+  "عبدالعزيز زهير علي المغربي",
+
+  "عبدالعزيز فهد عزييز المغربي",
+
+  "عبدالله شكر عبدالله المغربي",
+
+  "عبدالله عمر عبدالمعين الخرماني",
+
+  "عبدالله هشام عبدالمعتني الصعيدي",
+
+  "عمر مختار احمد شريان",
+
+  "عمران سامي بن عمران المغربي",
+
+  "فهد صالح راشد المرامحي",
+
+  "كرم عبدالهادي حامد الحربي",
+
+  "مازن حسن ابراهيم التلب",
+
+  "محمد بليغ ابن حمدي اللبدي",
+
+  "محمد عبدالوهاب بن عايد الحربي",
+
+  "معتز نعيم ابراهيم المغربي",
+
+  "مناف منير  شحره",
+
+  "نايف سعد بن محمد المغربي",
+
+  "نواف محمد رمضان الشناط",
+
+  "نواف ياسر بن عوض  الله المولد",
+
+  "هتان حميد بن حمدان الجحدلي",
+
+  "وائل عواش يحي زرنوقي",
+
+  "وسيم بسام جابر الحربي",
+
+  "يزيد محمد سليمان زعوري"
+
+];
+
+// =====================================================
+// إنشاء الطلاب
+// =====================================================
+
+const container =
+  document.getElementById(
+    "formContainer"
+  );
+
+studentsList.forEach(
+  function(name, index) {
+
+    const row =
+      document.createElement("div");
+
+    row.className =
+      "student-row";
+
+    row.innerHTML = `
+
+      <span class="student-name">
+        ${index + 1}. ${name}
+      </span>
+
+      <div class="radio-group">
+
+        <label>
+
+          <input
+            type="radio"
+            name="status_${index}"
+            value="حاضر"
+            checked
+          >
+
+          <span class="present">
+            حاضر
+          </span>
+
+        </label>
+
+        <label>
+
+          <input
+            type="radio"
+            name="status_${index}"
+            value="غائب"
+          >
+
+          <span class="absent">
+            غائب
+          </span>
+
+        </label>
+
+        <label>
+
+          <input
+            type="radio"
+            name="status_${index}"
+            value="متأخر"
+          >
+
+          <span class="late">
+            متأخر
+          </span>
+
+        </label>
+
+        <label>
+
+          <input
+            type="radio"
+            name="status_${index}"
+            value="غياب بعذر"
+          >
+
+          <span class="excused">
+            بعذر
+          </span>
+
+        </label>
+
+      </div>
+
+    `;
+
+    container.appendChild(row);
+
+  }
+);
+
+// =====================================================
+// إرسال إلى Google Sheets
+// =====================================================
+
+async function sendToGoogleSheet() {
+
+  const dateVal =
+    document.getElementById(
+      "attendanceDate"
+    ).value;
+
+  if (!dateVal) {
+
+    alert(
+      "⚠️ الرجاء تحديد التاريخ أولاً"
+    );
+
+    return;
+
+  }
+
+  const dailyRecord = {
+
+    date: dateVal,
+
+    day:
+      document.getElementById(
+        "attendanceDay"
+      ).value,
+
+    semester:
+      document.getElementById(
+        "semester"
+      ).value,
+
+    students: {}
+
+  };
+
+  studentsList.forEach(
+    function(name, index) {
+
+      const selectedRadio =
+        document.querySelector(
+          `input[name="status_${index}"]:checked`
+        );
+
+      dailyRecord.students[name] =
+
+        selectedRadio
+          ? selectedRadio.value
+          : "حاضر";
+
+    }
+  );
+
+  const saveButton =
+    document.getElementById(
+      "saveButton"
+    );
+
+  const loadingText =
+    document.getElementById(
+      "loadingText"
+    );
+
+  saveButton.disabled = true;
+
+  loadingText.style.display =
+    "block";
+
+  try {
+
+    await fetch(
+
+      SCRIPT_URL,
+
+      {
+
+        method: "POST",
+
+        mode: "no-cors",
+
+        body:
+          JSON.stringify(
+            dailyRecord
+          )
+
+      }
+
+    );
+
+    loadingText.style.display =
+      "none";
+
+    saveButton.disabled =
+      false;
+
+    alert(
+      "✅ تم حفظ تحضير الصف الرابع أ بنجاح"
+    );
+
+  }
+
+  catch (error) {
+
+    loadingText.style.display =
+      "none";
+
+    saveButton.disabled =
+      false;
+
+    alert(
+      "❌ حدث خطأ أثناء الحفظ\n\n" +
+      error.message
+    );
+
+  }
+
+}
+
+</script>
+
+</body>
+
+</html>
