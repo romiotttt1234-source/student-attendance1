@@ -440,7 +440,7 @@
       }
     });
 
-    // القائمة الافتراضية للطلاب
+    // القائمة الافتراضية للطلاب (تم إصلاح خطأ السلسلة النصية هنا)
     const defaultStudents = [
       "ASIL SULEMAN ABDUL RAZZAQ YASIN",
       "أحمد عبدالقادر عبدالله الغانمي",
@@ -467,8 +467,8 @@
       "مراد غريب جابر السلمي",
       "معاذ ميمون احمد الرايقي",
       "نواف طلعت بن عبدالرحيم الشعيبي",
-      "وسام عبدالحميد نافع السلمي
-      "جاسم فيصل السلمي "   
+      "وسام عبدالحميد نافع السلمي",
+      "جاسم فيصل السلمي"
     ];
 
     // استرجاع القائمة المحفوظة أو تحميل الافتراضية
@@ -565,9 +565,8 @@
       try {
         await fetch(SCRIPT_URL, {
           method: "POST",
-          mode: "no-cors",
           headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "text/plain;charset=utf-8"
           },
           body: JSON.stringify(dailyRecord)
         });
