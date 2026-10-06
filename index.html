@@ -76,7 +76,6 @@
     /* =========================
        شاشة القفل
     ========================= */
-
     #lockScreen {
       position: fixed;
       inset: 0;
@@ -133,7 +132,6 @@
     /* =========================
        المحتوى الرئيسي
     ========================= */
-
     #mainContent {
       display: none;
       max-width: 700px;
@@ -176,7 +174,6 @@
     /* =========================
        أزرار إدارة الطلاب
     ========================= */
-
     .add-student-btn {
       background: #10B981;
       color: white;
@@ -198,7 +195,6 @@
     /* =========================
        صفوف الطلاب
     ========================= */
-
     .student-row {
       background: var(--panel-bg);
       padding: 12px 15px;
@@ -248,8 +244,343 @@
     /* =========================
        خيارات الحالة
     ========================= */
-
     .radio-group {
       display: flex;
       gap: 6px;
-      flex
+      flex-wrap: wrap;
+    }
+
+    .radio-group label {
+      background: var(--input-bg);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      cursor: pointer;
+      user-select: none;
+      font-weight: bold;
+    }
+
+    .radio-group input {
+      display: none;
+    }
+
+    .radio-group span {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .radio-group input:checked + span.present {
+      background: #22C55E;
+      color: #fff;
+    }
+
+    .radio-group input:checked + span.absent {
+      background: #EF4444;
+      color: #fff;
+    }
+
+    .radio-group input:checked + span.late {
+      background: #EAB308;
+      color: #000;
+    }
+
+    .radio-group input:checked + span.excused {
+      background: #0EA5E9;
+      color: #fff;
+    }
+
+    /* =========================
+       زر الحفظ والتحميل
+    ========================= */
+    .save-btn {
+      background: #3B82F6;
+      color: #fff;
+      border: none;
+      padding: 15px;
+      width: 100%;
+      font-size: 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 20px;
+      transition: background 0.2s;
+    }
+
+    .save-btn:hover {
+      background: var(--btn-hover);
+    }
+
+    .save-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .loading {
+      text-align: center;
+      color: #38BDF8;
+      display: none;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body data-theme="blue">
+
+  <!-- شاشة القفل -->
+  <div id="lockScreen">
+    <div class="lock-box">
+      <h3>🔒 لوحة التحضير محمية</h3>
+      <p style="color:#94A3B8">الرجاء إدخال الرقم السري</p>
+      <input type="password" id="pinInput" placeholder="****" maxlength="4">
+      <br>
+      <button onclick="checkPin()">دخول</button>
+      <div id="errorMsg" class="error-msg">الرقم السري غير صحيح!</div>
+    </div>
+  </div>
+
+  <!-- المحتوى الرئيسي -->
+  <div id="mainContent">
+    <h2>📋 تحضير الصف الأول</h2>
+
+    <div class="control-panel">
+      <div class="control-group">
+        <span>🎨 اختر الثيم:</span>
+        <select id="themeSelect" onchange="changeTheme(this.value)">
+          <option value="blue">🔵 أزرق ملكي</option>
+          <option value="dark">🌙 داكن فاخر</option>
+          <option value="light">☀️ فاتح نظيف</option>
+          <option value="green">🌲 أخضر هادئ</option>
+        </select>
+      </div>
+
+      <div class="control-group">
+        <span>📅 التاريخ:</span>
+        <input type="date" id="attendanceDate">
+      </div>
+
+      <div class="control-group">
+        <span>📆 اليوم الدراسي:</span>
+        <select id="attendanceDay">
+          <option value="الأحد">الأحد</option>
+          <option value="الإثنين">الإثنين</option>
+          <option value="الثلاثاء">الثلاثاء</option>
+          <option value="الأربعاء">الأربعاء</option>
+          <option value="الخميس">الخميس</option>
+        </select>
+      </div>
+
+      <div class="control-group">
+        <span>📚 الفصل الدراسي:</span>
+        <select id="semester">
+          <option value="الفصل الدراسي الأول">الفصل الدراسي الأول</option>
+          <option value="الفصل الدراسي الثاني">الفصل الدراسي الثاني</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- زر إضافة طالب -->
+    <button class="add-student-btn" onclick="addStudent()">➕ إضافة طالب جديد</button>
+
+    <!-- حاوية قائمة الطلاب -->
+    <div id="formContainer"></div>
+
+    <button class="save-btn" id="saveButton" onclick="sendToGoogleSheet()">💾 حفظ التحضير</button>
+    <div id="loadingText" class="loading">⏳ جاري الحفظ...</div>
+  </div>
+
+  <script>
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx0CE8ONQ7B0CTYCyhkRXULn2MPdfn-G3DxaCimx0qemiOjgKvxOE2xGOYiHT45ylo2MQ/exec";
+
+    // الثيمات
+    function changeTheme(themeName) {
+      document.body.setAttribute("data-theme", themeName);
+      localStorage.setItem("school_theme", themeName);
+    }
+
+    const savedTheme = localStorage.getItem("school_theme");
+    if (savedTheme) {
+      document.body.setAttribute("data-theme", savedTheme);
+    }
+
+    // التاريخ واليوم
+    const today = new Date();
+    document.getElementById("attendanceDate").valueAsDate = today;
+
+    const daysMap = {
+      Sunday: "الأحد",
+      Monday: "الإثنين",
+      Tuesday: "الثلاثاء",
+      Wednesday: "الأربعاء",
+      Thursday: "الخميس"
+    };
+
+    const currentDayName = new Intl.DateTimeFormat("en-US", { weekday: "long" }).format(today);
+    if (daysMap[currentDayName]) {
+      document.getElementById("attendanceDay").value = daysMap[currentDayName];
+    }
+
+    // الرقم السري
+    function checkPin() {
+      const pin = document.getElementById("pinInput").value;
+      if (pin === "1234") {
+        document.getElementById("lockScreen").style.display = "none";
+        document.getElementById("mainContent").style.display = "block";
+        document.getElementById("themeSelect").value = localStorage.getItem("school_theme") || "blue";
+      } else {
+        document.getElementById("errorMsg").style.display = "block";
+        document.getElementById("pinInput").value = "";
+      }
+    }
+
+    document.getElementById("pinInput").addEventListener("keypress", function(event) {
+      if (event.key === "Enter") {
+        checkPin();
+      }
+    });
+
+    // القائمة الافتراضية للطلاب (تم إصلاح خطأ السلسلة النصية هنا)
+    const defaultStudents = [
+      "ASIL SULEMAN ABDUL RAZZAQ YASIN",
+      "أحمد عبدالقادر عبدالله الغانمي",
+      "أمير فواد سعود المغربي",
+      "اياد خلف محمدعلي الساطي",
+      "اياس نواف دخيل الصحفي",
+      "بسام عبدالله عيد المحلبدي",
+      "تركي عبدالوهاب بن عايد الحربي",
+      "حازم عيسى عوض الصاطي",
+      "راكان فيصل علي السلمي",
+      "ريان محمد خلف المغربي",
+      "زياد زهير علي المغربي",
+      "سلمان عيسي عبدالعزيز العقبي",
+      "صقر رشاد دندون الصعيدي",
+      "عبدالعزيز عيسي عبدالعزيز العقبي",
+      "علي شكر عبدالله المغربي",
+      "علي محسن عبده ناصر",
+      "عمار علي بن رباح المحلبدي",
+      "فهد عبد الرحمن محمدعلي الصاطي",
+      "فيصل تميم مبروك الطيارى",
+      "مالك مجدي محمد الدريويشي",
+      "محمد بركةالله عبيدالله المحلبدي",
+      "محمد وسيم محمد المغربى",
+      "مراد غريب جابر السلمي",
+      "معاذ ميمون احمد الرايقي",
+      "نواف طلعت بن عبدالرحيم الشعيبي",
+      "وسام عبدالحميد نافع السلمي",
+      "جاسم فيصل السلمي"
+    ];
+
+    // استرجاع القائمة المحفوظة أو تحميل الافتراضية
+    let studentsList = JSON.parse(localStorage.getItem("students_list_grade1")) || defaultStudents;
+
+    // دالة عرض قائمة الطلاب
+    function renderStudents() {
+      const container = document.getElementById("formContainer");
+      container.innerHTML = "";
+
+      studentsList.forEach(function(name, index) {
+        const row = document.createElement("div");
+        row.className = "student-row";
+
+        row.innerHTML = `
+          <div class="student-info">
+            <button class="delete-btn" onclick="deleteStudent(${index})" title="حذف الطالب">✕</button>
+            <span class="student-name">${index + 1}. ${name}</span>
+          </div>
+          <div class="radio-group">
+            <label>
+              <input type="radio" name="status_${index}" value="حاضر" checked>
+              <span class="present">حاضر</span>
+            </label>
+            <label>
+              <input type="radio" name="status_${index}" value="غائب">
+              <span class="absent">غائب</span>
+            </label>
+            <label>
+              <input type="radio" name="status_${index}" value="متأخر">
+              <span class="late">متأخر</span>
+            </label>
+            <label>
+              <input type="radio" name="status_${index}" value="غياب بعذر">
+              <span class="excused">بعذر</span>
+            </label>
+          </div>
+        `;
+
+        container.appendChild(row);
+      });
+    }
+
+    // دالة إضافة طالب جديد
+    function addStudent() {
+      const newName = prompt("أدخل اسم الطالب الجديد:");
+      if (newName && newName.trim() !== "") {
+        studentsList.push(newName.trim());
+        localStorage.setItem("students_list_grade1", JSON.stringify(studentsList));
+        renderStudents();
+      }
+    }
+
+    // دالة حذف طالب
+    function deleteStudent(index) {
+      const studentName = studentsList[index];
+      if (confirm(`هل أنت تأكد من حذف الطالب:\n"${studentName}"؟`)) {
+        studentsList.splice(index, 1);
+        localStorage.setItem("students_list_grade1", JSON.stringify(studentsList));
+        renderStudents();
+      }
+    }
+
+    // تشغيل العرض الأولي
+    renderStudents();
+
+    // إرسال البيانات إلى Google Sheets
+    async function sendToGoogleSheet() {
+      const dateVal = document.getElementById("attendanceDate").value;
+
+      if (!dateVal) {
+        alert("⚠️ الرجاء تحديد التاريخ أولاً");
+        return;
+      }
+
+      const dailyRecord = {
+        date: dateVal,
+        day: document.getElementById("attendanceDay").value,
+        semester: document.getElementById("semester").value,
+        students: {}
+      };
+
+      studentsList.forEach(function(name, index) {
+        const selectedRadio = document.querySelector(`input[name="status_${index}"]:checked`);
+        dailyRecord.students[name] = selectedRadio ? selectedRadio.value : "حاضر";
+      });
+
+      const saveButton = document.getElementById("saveButton");
+      const loadingText = document.getElementById("loadingText");
+
+      saveButton.disabled = true;
+      loadingText.style.display = "block";
+
+      try {
+        await fetch(SCRIPT_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "text/plain;charset=utf-8"
+          },
+          body: JSON.stringify(dailyRecord)
+        });
+
+        loadingText.style.display = "none";
+        saveButton.disabled = false;
+        alert("✅ تم حفظ التحضير بنجاح");
+      } catch (error) {
+        loadingText.style.display = "none";
+        saveButton.disabled = false;
+        alert("❌ حدث خطأ أثناء الحفظ\n\n" + error.message);
+      }
+    }
+  </script>
+</body>
+
+</html>
